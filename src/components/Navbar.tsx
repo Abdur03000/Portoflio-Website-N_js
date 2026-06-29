@@ -35,10 +35,10 @@ export default function Navbar() {
       }}>
         {/* Logo */}
         <a href="#home" style={{
-          fontSize: '1.15rem', fontWeight: 700, letterSpacing: '-0.02em',
+          fontSize: '1.15rem', fontWeight: 800, letterSpacing: '-0.03em',
           color: 'var(--text)', textDecoration: 'none',
         }}>
-          ar<span style={{ color: 'var(--amber)' }}>.</span>
+          ar<span style={{ color: 'var(--indigo)' }}>.</span>
         </a>
 
         {/* Desktop links */}
