@@ -5,7 +5,7 @@ export const SITE = {
   title: 'Backend Developer & AI Engineer',
   email: 'abdurrahmanios710@gmail.com',
   phone: '03000735665',
-  github: 'Abdur0300',
+  github: 'Abdur03000',
   linkedin: 'abdur0300',
   location: 'Islamabad, Pakistan',
   bio: 'Backend Developer specializing in Django, FastAPI, DRF & Flask. Building LLM-powered agentic AI systems and scalable REST APIs.',
