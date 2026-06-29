@@ -139,7 +139,7 @@ export default function Home() {
               {/* Dot */}
               <div style={{
                 position: 'absolute', left: '-1.95rem', top: '0.4rem',
-                width: 9, height: 9, background: i === 0 ? 'var(--amber)' : 'var(--text-3)',
+                width: 9, height: 9, background: e.current ? 'var(--amber)' : 'var(--text-3)',
                 borderRadius: '50%', border: '2px solid var(--bg)',
               }} />
 
@@ -150,10 +150,30 @@ export default function Home() {
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.35rem' }}>
                   <h4 style={{ fontSize: '1rem', fontWeight: 600 }}>{e.title}</h4>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-3)', background: 'var(--bg-2)', padding: '0.15rem 0.6rem', borderRadius: 4 }}>{e.period}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    {e.current && (
+                      <span style={{ fontSize: '0.68rem', fontWeight: 600, background: 'rgba(92,184,92,0.12)', color: '#5cb85c', padding: '0.15rem 0.55rem', borderRadius: 4 }}>
+                        Present
+                      </span>
+                    )}
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-3)', background: 'var(--bg-2)', padding: '0.15rem 0.6rem', borderRadius: 4 }}>{e.period}</span>
+                  </div>
                 </div>
-                <div style={{ color: 'var(--amber)', fontSize: '0.82rem', fontWeight: 500, marginBottom: '0.5rem' }}>{e.company}</div>
-                <p style={{ color: 'var(--text-2)', fontSize: '0.85rem', lineHeight: 1.65 }}>{e.desc}</p>
+                <div style={{ color: 'var(--amber)', fontSize: '0.82rem', fontWeight: 500, marginBottom: '0.6rem' }}>{e.company}</div>
+                <p style={{ color: 'var(--text-2)', fontSize: '0.85rem', lineHeight: 1.65, marginBottom: e.projects?.length ? '0.9rem' : 0 }}>{e.desc}</p>
+                {e.projects?.length && (
+                  <div>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-3)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.45rem' }}>Projects</div>
+                    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                      {e.projects.map(p => (
+                        <li key={p} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.83rem', color: 'var(--text-2)' }}>
+                          <span style={{ color: 'var(--amber)', marginTop: '0.25rem', flexShrink: 0 }}>›</span>
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           ))}

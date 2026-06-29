@@ -107,25 +107,7 @@ export default function Hero() {
         </a>
       </div>
 
-      {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
-        color: 'var(--text-3)', fontSize: '0.7rem', letterSpacing: '0.05em',
-        animation: 'fadeIn 0.6s ease 0.7s both',
-      }}>
-        <div style={{
-          width: 22, height: 36, border: '1.5px solid var(--text-3)',
-          borderRadius: 11, position: 'relative',
-        }}>
-          <div style={{
-            position: 'absolute', top: 5, left: '50%',
-            width: 3, height: 7, background: 'var(--amber)',
-            borderRadius: 2, animation: 'scrollDot 2s ease infinite',
-          }} />
-        </div>
-        <span>scroll</span>
-      </div>
+
     </section>
   )
 }

@@ -15,8 +15,8 @@ export const DEFAULT_PROJECTS: Project[] = [
   {
     id: 1,
     title: 'Danube Bakery - Bin Dawood Group',
-    description: 'Complete bakery management system for Bin Dawood Group. Inventory tracking, order management, billing, and real-time analytics dashboard with staff management.',
-    tags: ['Django', 'DRF', 'PostgreSQL', 'Celery'],
+    description: 'Full bakery ecosystem for Bin Dawood Group — cake customization mobile app, user-friendly admin panel, dedicated KDS for chefs, inventory, billing, and real-time analytics.',
+    tags: ['Django', 'DRF', 'React Native', 'PostgreSQL'],
     icon: 'fas fa-bread-slice',
     status: 'published',
     link: '/projects/danube-bakery',
@@ -69,20 +69,36 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     title: 'Backend Developer',
     company: 'Enigmatix',
-    period: '2025 - Present',
+    period: 'Jan 2025 – Present',
+    current: true,
     desc: 'Building scalable REST APIs and backend systems using Django, DRF, and FastAPI. Working on data pipelines, authentication systems, and third-party integrations.',
+    projects: [
+      'Danube Bakery – Bin Dawood Group (Django, DRF, PostgreSQL, Celery)',
+      'SAMS Asset Management Platform (FastAPI, PostgreSQL, Prisma)',
+    ],
   },
   {
     title: 'Backend Developer',
     company: 'Tronic AI — Islamabad',
-    period: '2025 - Present',
-    desc: 'Developing LLM-powered agentic AI systems with LangChain and LangGraph. Building intelligent automation pipelines and conversational AI backends with FastAPI and Node.js.',
+    period: 'Mar 2025 – Jun 2025',
+    current: false,
+    desc: 'Developing LLM-powered agentic AI systems with LangChain and LangGraph. Building intelligent automation pipelines and conversational AI backends.',
+    projects: [
+      'Multi-agent AI framework with tool use & memory (LangChain, LangGraph)',
+      'Conversational AI backend with RAG pipeline (FastAPI, OpenAI, Pinecone)',
+    ],
   },
   {
     title: 'Freelance Backend Developer',
     company: 'Self-Employed',
-    period: '2023 - Present',
-    desc: 'Delivered full-stack and backend solutions — REST APIs, Django/Flask apps, and AI-integrated systems — for clients across various industries.',
+    period: 'Jun 2023 – Present',
+    current: true,
+    desc: 'Delivering backend solutions — REST APIs, Django/Flask apps, and AI-integrated systems — for clients across various industries.',
+    projects: [
+      'E-commerce REST API with Stripe integration (Django, DRF)',
+      'Inventory management system for retail client (Flask, SQLite)',
+      'Telegram bot automation for lead generation (Python, FastAPI)',
+    ],
   },
 ]
 

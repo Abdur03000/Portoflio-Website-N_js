@@ -34,5 +34,7 @@ export interface ExperienceItem {
   title: string
   company: string
   period: string
+  current?: boolean
   desc: string
+  projects?: string[]
 }
