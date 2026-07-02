@@ -2,15 +2,25 @@
 import { useEffect, useState } from 'react'
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [active, setActive] = useState('home')
+  const [scrolled, setScrolled]   = useState(false)
+  const [open, setOpen]           = useState(false)
+  const [active, setActive]       = useState('home')
+  const [dark, setDark]           = useState(true)   // default dark
 
+  // read persisted theme on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('theme')
+    const isDark = saved ? saved === 'dark' : true
+    setDark(isDark)
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
+  }, [])
+
+  // scroll spy
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40)
       const sections = ['home', 'projects', 'skills', 'experience', 'contact']
-      for (const id of sections.reverse()) {
+      for (const id of [...sections].reverse()) {
         const el = document.getElementById(id)
         if (el && window.scrollY >= el.offsetTop - 120) { setActive(id); break }
       }
@@ -19,7 +29,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  function toggleTheme() {
+    const next = !dark
+    setDark(next)
+    document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light')
+    localStorage.setItem('theme', next ? 'dark' : 'light')
+  }
+
   const links = ['home', 'projects', 'skills', 'experience', 'contact']
+
+  const navBg = scrolled
+    ? dark ? 'rgba(13,12,11,0.95)' : 'rgba(245,240,232,0.95)'
+    : 'transparent'
 
   return (
     <>
@@ -28,20 +49,21 @@ export default function Navbar() {
         height: 'var(--nav-height)', zIndex: 1000,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 clamp(1rem,4vw,2.5rem)',
-        background: scrolled ? 'rgba(15,15,15,0.96)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        background: navBg,
+        backdropFilter: scrolled ? 'blur(18px)' : 'none',
         borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-        transition: 'background 0.3s, border-color 0.3s, backdrop-filter 0.3s',
+        transition: 'background 0.3s, border-color 0.3s',
       }}>
+
         {/* Logo */}
         <a href="#home" style={{
           fontSize: '1.15rem', fontWeight: 800, letterSpacing: '-0.03em',
           color: 'var(--text)', textDecoration: 'none',
         }}>
-          ar<span style={{ color: 'var(--indigo)' }}>.</span>
+          AR<span style={{ color: 'var(--accent)' }}>.</span>
         </a>
 
-        {/* Desktop links */}
+        {/* Desktop nav links */}
         <ul style={{ display: 'flex', gap: '0.25rem', listStyle: 'none', alignItems: 'center' }} className="nav-links">
           {links.map(l => (
             <li key={l}>
@@ -55,8 +77,8 @@ export default function Navbar() {
                   transition: 'color 0.2s, background 0.2s',
                   display: 'block',
                 }}
-                onMouseEnter={e => { if (active !== l) e.currentTarget.style.color = 'var(--text)' }}
-                onMouseLeave={e => { if (active !== l) e.currentTarget.style.color = 'var(--text-2)' }}
+                onMouseEnter={e => { if (active !== l) (e.currentTarget as HTMLElement).style.color = 'var(--text)' }}
+                onMouseLeave={e => { if (active !== l) (e.currentTarget as HTMLElement).style.color = 'var(--text-2)' }}
               >
                 {l.charAt(0).toUpperCase() + l.slice(1)}
               </a>
@@ -64,25 +86,47 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* CTA */}
-        <a href="#contact" className="btn btn-primary btn-sm nav-cta" style={{ fontWeight: 600 }}>
-          Hire me
-        </a>
+        {/* Right side: theme toggle + CTA */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+          <button
+            onClick={toggleTheme}
+            className="theme-toggle nav-links"
+            aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={dark ? 'Light mode' : 'Dark mode'}
+          >
+            {dark ? '☀️' : '🌙'}
+          </button>
 
-        {/* Hamburger */}
-        <button onClick={() => setOpen(!open)} className="nav-toggle" style={{
-          display: 'none', background: 'none', border: 'none',
-          color: 'var(--text)', fontSize: '1.2rem', cursor: 'pointer', padding: '0.4rem',
-        }}>
-          <i className={`fas ${open ? 'fa-times' : 'fa-bars'}`} />
-        </button>
+          <a href="#contact" className="btn btn-primary btn-sm nav-cta" style={{ fontWeight: 600 }}>
+            Hire me
+          </a>
+        </div>
+
+        {/* Mobile right side */}
+        <div className="nav-mobile-right" style={{ display: 'none', alignItems: 'center', gap: '0.5rem' }}>
+          <button
+            onClick={toggleTheme}
+            className="theme-toggle"
+            aria-label="Toggle theme"
+            style={{ width: 34, height: 34, fontSize: '0.9rem' }}
+          >
+            {dark ? '☀️' : '🌙'}
+          </button>
+          <button onClick={() => setOpen(!open)} style={{
+            background: 'none', border: 'none',
+            color: 'var(--text)', fontSize: '1.2rem', cursor: 'pointer', padding: '0.4rem',
+          }}>
+            <i className={`fas ${open ? 'fa-times' : 'fa-bars'}`} />
+          </button>
+        </div>
       </nav>
 
       {/* Mobile drawer */}
       {open && (
         <div style={{
           position: 'fixed', top: 'var(--nav-height)', left: 0, right: 0,
-          background: 'rgba(15,15,15,0.98)', backdropFilter: 'blur(16px)',
+          background: dark ? 'rgba(13,12,11,0.98)' : 'rgba(245,240,232,0.98)',
+          backdropFilter: 'blur(18px)',
           borderBottom: '1px solid var(--border)', zIndex: 999,
           padding: '1.5rem 1.5rem 2rem', animation: 'fadeUp 0.2s ease',
         }}>
@@ -108,9 +152,9 @@ export default function Navbar() {
 
       <style>{`
         @media (max-width: 768px) {
-          .nav-links { display: none !important; }
-          .nav-cta   { display: none !important; }
-          .nav-toggle { display: block !important; }
+          .nav-links  { display: none !important; }
+          .nav-cta    { display: none !important; }
+          .nav-mobile-right { display: flex !important; }
         }
       `}</style>
     </>

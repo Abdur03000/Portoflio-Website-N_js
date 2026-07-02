@@ -7,13 +7,26 @@ export const metadata: Metadata = {
   description: `${SITE.title} — ${SITE.bio}`,
 }
 
+// This script runs before React hydrates — prevents white flash on reload
+const themeScript = `
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+    } catch(e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+`
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <head>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23e8a045'/><text x='50' y='68' font-size='52' font-family='Inter,sans-serif' font-weight='700' text-anchor='middle' fill='%230f0f0f'>ar</text></svg>" />
+        {/* Inject theme before page paint — no flash */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body style={{ background: '#0f0f0f', color: '#f0ece4' }}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }
