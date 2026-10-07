@@ -20,9 +20,9 @@ export default function Footer() {
 
         {/* center: nav */}
         <nav className="footer-nav" aria-label="Footer navigation">
-          {['home', 'projects', 'skills', 'experience', 'contact'].map(l => (
+          {['home', 'projects', 'skills', 'experience', 'cv', 'contact'].map(l => (
             <a key={l} href={`#${l}`} className="footer-nav-link">
-              {l.charAt(0).toUpperCase() + l.slice(1)}
+              {l === 'cv' ? 'CV' : l.charAt(0).toUpperCase() + l.slice(1)}
             </a>
           ))}
         </nav>
@@ -32,7 +32,7 @@ export default function Footer() {
           <a href={`https://github.com/${SITE.github}`} target="_blank" rel="noreferrer" className="footer-soc" title="GitHub">
             <i className="fab fa-github" />
           </a>
-          <a href={`https://linkedin.com/in/${SITE.linkedin}`} target="_blank" rel="noreferrer" className="footer-soc" title="LinkedIn">
+          <a href={SITE.linkedinUrl} target="_blank" rel="noreferrer" className="footer-soc" title="LinkedIn">
             <i className="fab fa-linkedin-in" />
           </a>
           <a href={`mailto:${SITE.email}`} className="footer-soc" title="Email">

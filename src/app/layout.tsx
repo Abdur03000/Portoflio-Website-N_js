@@ -12,16 +12,16 @@ const themeScript = `
   (function() {
     try {
       var t = localStorage.getItem('theme');
-      document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
     } catch(e) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.setAttribute('data-theme', 'light');
     }
   })();
 `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="light">
       <head>
         {/* Inject theme before page paint — no flash */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

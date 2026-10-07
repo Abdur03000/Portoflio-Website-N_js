@@ -12,14 +12,43 @@ const projectAccents = [
   { color: '#d4845a', dim: 'rgba(212,132,90,0.10)',  line: 'rgba(212,132,90,0.6)'  },
   { color: '#5a8fd4', dim: 'rgba(90,143,212,0.10)',  line: 'rgba(90,143,212,0.6)'  },
   { color: '#6b9e7e', dim: 'rgba(107,158,126,0.10)', line: 'rgba(107,158,126,0.6)' },
+  { color: '#8f6bbf', dim: 'rgba(143,107,191,0.10)', line: 'rgba(143,107,191,0.6)' },
+]
+
+/* ── CV highlight cards (mirrors CV PDF, styled like project cards) ── */
+const cvCards = [
+  {
+    title: 'Professional Summary',
+    icon: 'fas fa-code',
+    desc: 'Python Backend Developer with 2+ years of experience building scalable backend applications and RESTful APIs using Python, Django, DRF, and FastAPI — including production-ready solutions for enterprise clients. Focused on clean, maintainable, high-performance backend code.',
+    tags: ['2+ Years', 'Python', 'Django'],
+  },
+  {
+    title: 'Professional Experience',
+    icon: 'fas fa-briefcase',
+    desc: 'Python Backend Developer at Enigmatix, Islamabad (Feb 2025 – Present). Building backends with Django & FastAPI, REST APIs with DRF, secure JWT auth, PostgreSQL query optimization, production debugging, and Agile code reviews.',
+    tags: ['Enigmatix', 'Feb 2025 – Present', 'Agile'],
+  },
+  {
+    title: 'Education',
+    icon: 'fas fa-graduation-cap',
+    desc: 'Bachelor of Science in Computer Science (BSCS) from The Islamia University of Bahawalpur (IUB), 2021 – 2025 — strong quantitative and logical foundation.',
+    tags: ['BSCS', 'IUB', '2021 – 2025'],
+  },
+  {
+    title: 'Core Competencies',
+    icon: 'fas fa-lightbulb',
+    desc: 'Django, DRF & FastAPI · PostgreSQL, MySQL, SQLite · Redis & Celery · JWT authentication · Git/GitHub, Linux, Nginx · performance optimization, debugging, and Agile development.',
+    tags: ['DRF · FastAPI', 'PostgreSQL · Redis', 'JWT · Celery'],
+  },
 ]
 
 /* ── skill group config ── */
 const skillGroups = [
-  { label: 'Backend',   icon: '⚙️',  cls: 'skill-backend', keys: ['Django','FastAPI','DRF','Flask','Node.js'] },
-  { label: 'AI / LLM',  icon: '🧠',  cls: 'skill-ai',      keys: ['LangChain','LangGraph','OpenAI API']       },
-  { label: 'Database',  icon: '🗄️', cls: 'skill-db',       keys: ['PostgreSQL','MongoDB','Redis']              },
-  { label: 'DevOps',    icon: '🚀',  cls: 'skill-devops',  keys: ['Docker','Git','AWS']                        },
+  { label: 'Backend',   icon: 'fas fa-server',    cls: 'skill-backend', keys: ['Django','FastAPI','DRF','Flask','Node.js'] },
+  { label: 'AI / LLM',  icon: 'fas fa-brain',     cls: 'skill-ai',      keys: ['LangChain','LangGraph','OpenAI API']       },
+  { label: 'Database',  icon: 'fas fa-database',  cls: 'skill-db',      keys: ['PostgreSQL','MongoDB','Redis']              },
+  { label: 'DevOps',    icon: 'fas fa-cogs',      cls: 'skill-devops',  keys: ['Docker','Git','AWS']                        },
 ]
 
 /* skill group accent colors using CSS vars */
@@ -98,7 +127,13 @@ export default function Home() {
             {DEFAULT_PROJECTS.map((p, i) => {
               const ac = projectAccents[i] ?? projectAccents[0]
               return (
-                <Link key={p.title} href={p.link} className={`pj-card fade-in stagger-${i + 1}`}>
+                <Link
+                  key={p.title}
+                  href={p.link}
+                  className={`pj-card fade-in stagger-${i + 1}`}
+                  target={p.link.startsWith('http') ? '_blank' : undefined}
+                  rel={p.link.startsWith('http') ? 'noreferrer' : undefined}
+                >
                   {/* colored left bar */}
                   <div className="pj-bar" style={{ background: ac.color }} />
 
@@ -122,7 +157,7 @@ export default function Home() {
                   </div>
 
                   <div className="pj-link" style={{ color: ac.color }}>
-                    {p.status === 'published' ? 'View project →' : 'Coming soon'}
+                    {p.status === 'published' ? (p.linkLabel ?? 'View project →') : 'Coming soon'}
                   </div>
                 </Link>
               )
@@ -149,7 +184,7 @@ export default function Home() {
               return (
                 <div key={g.label} className={`sg-block fade-in stagger-${gi + 1}`}>
                   <div className="sg-header">
-                    <span className="sg-emoji">{g.icon}</span>
+                    <span className="sg-emoji"><i className={g.icon} style={{ color: col }} /></span>
                     <span className="sg-label" style={{ color: col }}>{g.label}</span>
                   </div>
                   <div className="sg-items">
@@ -219,6 +254,58 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════
+          CV
+      ═══════════════════════════════════════ */}
+      <section id="cv" className="section-cv">
+        <div className="section-inner">
+
+          <div className="section-head fade-in">
+            <p className="section-eyebrow">— curriculum vitae</p>
+            <h2 className="section-title">My CV.</h2>
+            <p className="section-sub">The short version — download the full PDF for everything.</p>
+          </div>
+
+          <div className="projects-grid">
+            {cvCards.map((c, i) => {
+              const ac = projectAccents[i] ?? projectAccents[0]
+              return (
+                <div key={c.title} className={`pj-card fade-in stagger-${i + 1}`}>
+                  <div className="pj-bar" style={{ background: ac.color }} />
+
+                  <div className="pj-icon" style={{ background: ac.dim, color: ac.color }}>
+                    <i className={c.icon} />
+                  </div>
+
+                  <h3 className="pj-title">{c.title}</h3>
+                  <p className="pj-desc">{c.desc}</p>
+
+                  <div className="pj-tags">
+                    {c.tags.map(t => (
+                      <span key={t} className="pj-tag" style={{ borderColor: ac.line, color: ac.color }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="cv-download fade-in">
+            <a href="/Abdur_Rahman.pdf" download="Abdur_Rahman.pdf" className="btn-main">
+              <i className="fas fa-download" /> Download CV
+              <span className="btn-arrow">↓</span>
+            </a>
+            <a href="/Abdur_Rahman.pdf" target="_blank" rel="noreferrer" className="btn-ghost">
+              <span className="cv-ico"><i className="fas fa-file-pdf" /></span> View CV
+            </a>
+            <span className="cv-note">PDF · 2 pages · 53 KB</span>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════
           CONTACT
       ═══════════════════════════════════════ */}
       <section id="contact" className="section-contact">
@@ -245,7 +332,7 @@ export default function Home() {
                 {[
                   { icon: 'fas fa-envelope',      label: 'Email me',     value: SITE.email,            href: `mailto:${SITE.email}` },
                   { icon: 'fab fa-github',         label: 'GitHub',       value: `@${SITE.github}`,     href: `https://github.com/${SITE.github}` },
-                  { icon: 'fab fa-linkedin-in',    label: 'LinkedIn',     value: `in/${SITE.linkedin}`, href: `https://linkedin.com/in/${SITE.linkedin}` },
+                  { icon: 'fab fa-linkedin-in',    label: 'LinkedIn',     value: `in/${SITE.linkedin}`, href: SITE.linkedinUrl },
                   { icon: 'fas fa-phone',          label: 'Phone',        value: SITE.phone,            href: `tel:${SITE.phone}` },
                 ].map(c => (
                   <a key={c.label} href={c.href}

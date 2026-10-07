@@ -87,6 +87,9 @@ export default function Hero() {
             <a href="#projects" className="btn-main">
               See my work <span className="btn-arrow">→</span>
             </a>
+            <a href="/Abdur_Rahman.pdf" download="Abdur_Rahman.pdf" className="btn-ghost">
+              <i className="fas fa-download" style={{ marginRight: '0.5rem' }} /> Download CV
+            </a>
             <a href="#contact" className="btn-ghost">Let&apos;s talk</a>
           </div>
 
@@ -163,7 +166,7 @@ export default function Hero() {
               <a href="https://github.com/Abdur03000" target="_blank" rel="noreferrer" className="psoc" title="GitHub">
                 <i className="fab fa-github" />
               </a>
-              <a href="https://linkedin.com/in/abdur0300" target="_blank" rel="noreferrer" className="psoc" title="LinkedIn">
+              <a href="https://www.linkedin.com/in/abdur-rahman-3b70bb396?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noreferrer" className="psoc" title="LinkedIn">
                 <i className="fab fa-linkedin-in" />
               </a>
               <a href="mailto:abdurrahmanios710@gmail.com" className="psoc" title="Email">

@@ -1215,6 +1215,52 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════
+   CV SECTION
+═══════════════════════════════════════════════════ */
+.section-cv {
+  padding: 7rem 0;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-download {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+.cv-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin: -0.05rem 0.5rem -0.05rem -0.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  font-size: 0.72rem;
+  animation: cvPulse 2.4s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-ghost:hover .cv-ico {
+  transform: scale(1.15) rotate(-8deg);
+  box-shadow: 0 0 14px rgba(212, 132, 90, 0.55);
+}
+@keyframes cvPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 132, 90, 0.45); }
+  50%      { box-shadow: 0 0 0 7px rgba(212, 132, 90, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-ico { animation: none; }
+}
+.cv-note {
+  font-size: 0.8rem;
+  color: var(--text-3);
+}
+
+/* ═══════════════════════════════════════════════════
    CONTACT SECTION
 ═══════════════════════════════════════════════════ */
 .section-contact {

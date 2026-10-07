@@ -12,7 +12,7 @@ async function sha256(str: string) {
 const defaultData = {
   name: 'Abdur Rahman', title: 'Full Stack Developer & UI/UX Designer',
   bio: 'Crafting digital experiences with clean code and creative design.',
-  email: 'abdurrahmanios710@gmail.com', phone: '03000735665', github: 'Abdur0300',
+  email: 'abdurrahmanios710@gmail.com', phone: '03000735665', github: 'Abdur03000',
   skills: [
     { name: 'React', icon: 'fab fa-react' }, { name: 'Node.js', icon: 'fab fa-node-js' },
     { name: 'TypeScript', icon: 'fab fa-js' }, { name: 'Python', icon: 'fab fa-python' },

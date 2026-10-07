@@ -5,12 +5,12 @@ export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false)
   const [open, setOpen]           = useState(false)
   const [active, setActive]       = useState('home')
-  const [dark, setDark]           = useState(true)   // default dark
+  const [dark, setDark]           = useState(false)  // default light
 
   // read persisted theme on mount
   useEffect(() => {
     const saved = localStorage.getItem('theme')
-    const isDark = saved ? saved === 'dark' : true
+    const isDark = saved ? saved === 'dark' : false
     setDark(isDark)
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
   }, [])
@@ -19,7 +19,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40)
-      const sections = ['home', 'projects', 'skills', 'experience', 'contact']
+      const sections = ['home', 'projects', 'skills', 'experience', 'cv', 'contact']
       for (const id of [...sections].reverse()) {
         const el = document.getElementById(id)
         if (el && window.scrollY >= el.offsetTop - 120) { setActive(id); break }
@@ -36,7 +36,8 @@ export default function Navbar() {
     localStorage.setItem('theme', next ? 'dark' : 'light')
   }
 
-  const links = ['home', 'projects', 'skills', 'experience', 'contact']
+  const links = ['home', 'projects', 'skills', 'experience', 'cv', 'contact']
+  const label = (l: string) => (l === 'cv' ? 'CV' : l.charAt(0).toUpperCase() + l.slice(1))
 
   const navBg = scrolled
     ? dark ? 'rgba(13,12,11,0.95)' : 'rgba(245,240,232,0.95)'
@@ -80,7 +81,7 @@ export default function Navbar() {
                 onMouseEnter={e => { if (active !== l) (e.currentTarget as HTMLElement).style.color = 'var(--text)' }}
                 onMouseLeave={e => { if (active !== l) (e.currentTarget as HTMLElement).style.color = 'var(--text-2)' }}
               >
-                {l.charAt(0).toUpperCase() + l.slice(1)}
+                {label(l)}
               </a>
             </li>
           ))}
@@ -141,9 +142,9 @@ export default function Navbar() {
                     background: active === l ? 'var(--bg-card)' : 'transparent',
                     textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500,
                   }}
-                >
-                  {l.charAt(0).toUpperCase() + l.slice(1)}
-                </a>
+              >
+                {label(l)}
+              </a>
               </li>
             ))}
           </ul>

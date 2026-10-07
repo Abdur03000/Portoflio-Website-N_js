@@ -6,6 +6,7 @@ export interface Project {
   icon: string
   status: 'published' | 'draft'
   link: string
+  linkLabel?: string
   date: string
 }
 
