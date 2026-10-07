@@ -76,7 +76,7 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="hero-sub">Backend Developer &amp; AI Engineer</p>
+          <p className="hero-sub">Full Stack AI Engineer &amp; Backend Developer</p>
 
           <p className="hero-desc">
             I build the backends nobody sees — scalable REST APIs, Django/FastAPI

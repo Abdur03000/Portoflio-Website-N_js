@@ -18,12 +18,6 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* center: tagline */}
-        <div className="footer-tagline">
-          <strong>Full Stack AI Engineer</strong>
-          <span>React JS · Next JS · JavaScript</span>
-        </div>
-
         {/* right: socials */}
         <div className="footer-socials">
           <a href={`https://github.com/${SITE.github}`} target="_blank" rel="noreferrer" className="footer-soc" title="GitHub">

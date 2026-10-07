@@ -2,7 +2,7 @@ import type { Project, Skill, ExperienceItem, PortfolioData } from '@/types'
 
 export const SITE = {
   name: 'Abdur Rahman',
-  title: 'Backend Developer & AI Engineer',
+  title: 'Full Stack AI Engineer & Backend Developer',
   email: 'abdurrahmanios710@gmail.com',
   phone: '03000735665',
   github: 'Abdur03000',
