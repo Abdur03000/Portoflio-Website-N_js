@@ -56,13 +56,18 @@ export default function Navbar() {
         transition: 'background 0.3s, border-color 0.3s',
       }}>
 
-        {/* Logo */}
-        <a href="#home" style={{
-          fontSize: '1.15rem', fontWeight: 800, letterSpacing: '-0.03em',
-          color: 'var(--text)', textDecoration: 'none',
-        }}>
-          AR<span style={{ color: 'var(--accent)' }}>.</span>
-        </a>
+        {/* Logo + tagline */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.9rem', minWidth: 0 }}>
+          <a href="#home" style={{
+            fontSize: '1.15rem', fontWeight: 800, letterSpacing: '-0.03em',
+            color: 'var(--text)', textDecoration: 'none',
+          }}>
+            AR<span style={{ color: 'var(--accent)' }}>.</span>
+          </a>
+          <span className="nav-tagline">
+            <strong>Full Stack AI Engineer</strong> · React JS · Next JS · JavaScript
+          </span>
+        </div>
 
         {/* Desktop nav links */}
         <ul style={{ display: 'flex', gap: '0.25rem', listStyle: 'none', alignItems: 'center' }} className="nav-links">
@@ -152,6 +157,20 @@ export default function Navbar() {
       )}
 
       <style>{`
+        .nav-tagline { display: none; }
+        @media (min-width: 1200px) {
+          .nav-tagline {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text-3);
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            padding-left: 0.9rem;
+            border-left: 1px solid var(--border);
+          }
+          .nav-tagline strong { color: var(--accent); font-weight: 700; }
+        }
         @media (max-width: 768px) {
           .nav-links  { display: none !important; }
           .nav-cta    { display: none !important; }

@@ -18,14 +18,11 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* center: nav */}
-        <nav className="footer-nav" aria-label="Footer navigation">
-          {['home', 'projects', 'skills', 'experience', 'cv', 'contact'].map(l => (
-            <a key={l} href={`#${l}`} className="footer-nav-link">
-              {l === 'cv' ? 'CV' : l.charAt(0).toUpperCase() + l.slice(1)}
-            </a>
-          ))}
-        </nav>
+        {/* center: tagline */}
+        <div className="footer-tagline">
+          <strong>Full Stack AI Engineer</strong>
+          <span>React JS · Next JS · JavaScript</span>
+        </div>
 
         {/* right: socials */}
         <div className="footer-socials">
