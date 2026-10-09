@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { SITE } from '@/constants'
 import './globals.css'
 
-const SITE_URL = 'https://portoflio-website-n-js-abdur03000s-projects.vercel.app'
+const SITE_URL = 'https://ar-rehman0300-abdur03000s-projects.vercel.app'
 const TITLE = `${SITE.name} — Backend & AI Engineer`
 const DESCRIPTION = `${SITE.title} — ${SITE.bio}`
 
